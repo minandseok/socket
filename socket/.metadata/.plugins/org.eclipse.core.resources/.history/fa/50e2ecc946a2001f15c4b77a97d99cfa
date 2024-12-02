@@ -1,0 +1,15 @@
+package FTP;
+
+import java.net.Socket;
+import java.util.Scanner;
+
+public class FTPClient {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Socket socket = new Socket("localhost", 9999);
+		
+
+	}
+
+}

@@ -1,0 +1,53 @@
+package FTP;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Iterator;
+
+public class FTPServer {
+
+	public static void main(String[] args) {
+		try {
+			ServerSocket server = new ServerSocket(9999);
+			Socket socket = null;
+			while (true) {
+				System.out.println("클라이언트 접속 대기중");
+				socket = server.accept();
+				System.out.println(socket.getInetAddress() + "접속");
+				try {
+					while (true) {
+						DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+						DataInputStream dis = new DataInputStream(socket.getInputStream());
+						File dir = new File("C:/test/");
+						File[] files = dir.listFiles();
+						
+						dos.writeInt(files.length);
+						for (File file : files) {
+							dos.writeUTF(file.getName());
+						}
+						String loadingFile = dis.readUTF();
+						
+						File file = new File("C:/test/" + loadingFile);
+						FileInputStream fis = new FileInputStream(file);
+						DataInputStream fsis = new DataInputStream(fis);
+						
+						byte[] fileContents = new byte[(int) file.length()];
+						fsis.readFully(fileContents);
+						
+						dos.writeLong(fileContents.length)
+					}
+				} catch (Exception e) {
+					continue;
+				}
+				
+			}
+		} catch (Exception e) {
+			
+		}
+	}
+
+}

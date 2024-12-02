@@ -1,0 +1,24 @@
+package FTP;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
+public class FTPClient {
+
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		Socket socket = new Socket("localhost", 9999);
+		
+		DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+		DataInputStream dis = new DataInputStream(socket.getInputStream());
+		
+		while (true) {
+			
+		}
+	}
+
+}
